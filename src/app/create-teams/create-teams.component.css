@@ -1,0 +1,74 @@
+.container {
+  text-align: center;
+  margin-top: 20px;
+}
+
+.input-container {
+  margin-bottom: 20px;
+}
+
+input {
+  padding: 10px;
+  font-size: 16px;
+  margin-right: 10px;
+  width: 200px;
+}
+
+button {
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+  margin-top: 10px;
+}
+
+ul {
+  list-style: none;
+  padding: 0;
+}
+
+li {
+  font-size: 18px;
+  margin: 5px 0;
+}
+
+.teams {
+  display: flex;
+  justify-content: space-around;
+  margin-top: 20px;
+}
+
+.team {
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  width: 200px;
+  min-height: 150px;
+}
+
+.team h3 {
+  text-align: center;
+}
+
+cdkDrag {
+  cursor: move;
+  margin: 5px;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  background-color: #f4f4f4;
+  text-align: center;
+}
+
+cdkDrag.dragging {
+  background-color: #dcdcdc;
+  opacity: 0.7;
+}
+
+cdkDropList {
+  border: 2px dashed #ccc;
+  min-height: 100px;
+}
+
+cdkDropList-dragging {
+  background-color: #f0f0f0;
+}

@@ -1,0 +1,19 @@
+.app-header {
+  background-color: #007bff;
+  padding: 10px;
+  text-align: center;
+}
+
+.app-header nav button {
+  margin: 0 15px;
+  padding: 10px 20px;
+  color: white;
+  background-color: #007bff;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.app-header nav button:hover {
+  background-color: #0056b3;
+}

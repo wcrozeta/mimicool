@@ -1,0 +1,15 @@
+<div class="container">
+  <h1>Sorteio de Palavras</h1>
+
+  <div *ngIf="loading">Carregando palavras...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+  <p>Tempo restante: {{ timer }} segundos</p>
+
+  <button (click)="drawWords()" [disabled]="loading || error">Sortear 5 Palavras</button>
+  <button (click)="resetWords()" [disabled]="loading || error">Reiniciar Lista</button>
+
+  <ul>
+    <li *ngFor="let word of selectedWords">{{ word }}</li>
+  </ul>
+</div>
