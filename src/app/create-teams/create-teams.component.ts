@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';  // Importar as funções necessárias
+import { GameService } from '../shared/game.service';
 
 @Component({
   selector: 'app-create-teams',
@@ -7,28 +8,37 @@ import { moveItemInArray, CdkDragDrop } from '@angular/cdk/drag-drop';  // Impor
   styleUrls: ['./create-teams.component.css']
 })
 export class CreateTeamsComponent {
+
   names: string[] = [];
   team1: string[] = [];
   team2: string[] = [];
   nameInput: string = '';
 
+  constructor(private gameService: GameService) {
+
+  }
+
+  get getTeam1() {
+    return this.gameService.getTeam1;
+  }
+
+  get getTeam2() {
+    return this.gameService.getTeam2;
+  }
+
   addName(): void {
     if (this.nameInput.trim() !== '') {
       this.names.push(this.nameInput.trim());
-      this.nameInput = '';  // Limpar o campo de input
+      this.nameInput = '';
     }
   }
 
   divideTeams(): void {
-    if (this.names.length < 2) {
-      alert('É necessário adicionar pelo menos duas pessoas para dividir em times!');
-      return;
-    }
+    this.names = this.shuffleArray([...this.names]);
 
     this.team1 = [];
     this.team2 = [];
 
-    // Dividir os nomes em dois times de forma alternada
     this.names.forEach((name, index) => {
       if (index % 2 === 0) {
         this.team1.push(name);
@@ -36,6 +46,8 @@ export class CreateTeamsComponent {
         this.team2.push(name);
       }
     });
+
+    this.gameService.registerPlayers(this.team1, this.team2);
   }
 
   resetTeams(): void {
@@ -45,7 +57,6 @@ export class CreateTeamsComponent {
     this.nameInput = '';
   }
 
-  // Função chamada quando o item é movido entre os times
   drop(event: CdkDragDrop<string[]>) {
     const previousContainer = event.previousContainer;  // Lista original
     const currentContainer = event.container;  // Lista de destino
@@ -66,5 +77,18 @@ export class CreateTeamsComponent {
       // Adicionar o item à lista de destino
       currentContainer.data.splice(event.currentIndex, 0, item);
     }
+
+    this.gameService.registerPlayers(this.team1, this.team2);
+  }
+
+  private shuffleArray<T>(array: T[]): T[] {
+    for (let i = array.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+
+
+      [array[i], array[j]] = [array[j], array[i]];
+    }
+
+    return array;
   }
 }

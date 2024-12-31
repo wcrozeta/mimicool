@@ -1,39 +1,42 @@
 <div class="container">
-  <h1>Criar Dois Times</h1>
+  <h1>Criação de equipes</h1>
 
   <div class="input-container">
     <input type="text" [(ngModel)]="nameInput" placeholder="Digite o nome" (keyup.enter)="addName()" />
-    <button (click)="addName()" [disabled]="nameInput.trim() === ''">Adicionar Nome</button>
+    <button (click)="addName()" [disabled]="nameInput.trim() === ''">Adicionar</button>
   </div>
 
   <div *ngIf="names.length > 0">
-    <h3>Lista de Nomes</h3>
+    <h3>Jogadores</h3>
     <ul>
       <li *ngFor="let name of names">{{ name }}</li>
     </ul>
   </div>
 
-  <button (click)="divideTeams()" [disabled]="names.length < 2">Dividir em Times</button>
-  <button (click)="resetTeams()">Resetar Times</button>
+  <button class="btn btn-secondary" (click)="divideTeams()" [disabled]="names.length < 2">Sortear equipes</button>
 
-  <div *ngIf="team1.length > 0 && team2.length > 0">
-    <h2>Times Criados:</h2>
+  <div *ngIf="getTeam1.players.length > 0 && getTeam2.players.length > 0">
     <div class="teams">
       <div cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="team1" class="team">
-        <h3>Time 1</h3>
+        <h3>{{getTeam1.name}}</h3>
         <ul>
-          <li *ngFor="let member of team1" cdkDrag>{{ member }}</li>
+          <li *ngFor="let player of getTeam1.players" cdkDrag>{{ player.name }}</li>
         </ul>
       </div>
 
       <div cdkDropList (cdkDropListDropped)="drop($event)" [cdkDropListData]="team2" class="team">
-        <h3>Time 2</h3>
+        <h3>{{getTeam2.name}}</h3>
         <ul>
-          <li *ngFor="let member of team2" cdkDrag>{{ member }}</li>
+          <li *ngFor="let player of getTeam2.players" cdkDrag>{{ player.name }}</li>
         </ul>
       </div>
     </div>
   </div>
 
-  <button routerLink="/">Voltar para a Tela Inicial</button> <!-- Botão para voltar à tela inicial -->
+  <button *ngIf="getTeam1.players.length" class="btn btn-block btn-primary" routerLink="/word-draw"
+    [disabled]="names.length < 2">Jogar</button>
+
+  <!--
+  <button class="btn btn-outline-danger" routerLink="/">Voltar para a Tela Inicial</button>
+  Botão para voltar à tela inicial -->
 </div>

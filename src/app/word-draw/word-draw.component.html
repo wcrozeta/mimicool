@@ -1,15 +1,87 @@
-<div class="container">
-  <h1>Sorteio de Palavras</h1>
+<div class="container py-4">
+
+  <h1 class="text-center mb-4">Sua vez <br>
+    <span class="playerName"> {{ currentPlayer.name}}</span>
+  </h1>
 
   <div *ngIf="loading">Carregando palavras...</div>
   <div *ngIf="error" class="error">{{ error }}</div>
 
-  <p>Tempo restante: {{ timer }} segundos</p>
+  <!-- Palavras sorteadas -->
+  <div class="row justify-content-center">
+    <div class="col-md-8">
+      <div class="list-group">
+        <div *ngFor="let wordObj of selectedWords"
+          class="list-group-item d-flex align-items-center justify-content-between">
+          <span class="word-text h4 mb-0">{{ wordObj.text }}</span>
+          <div class="form-check">
+            <input type="checkbox" class="form-check-input" [id]="'word-' + wordObj.text"
+              [(ngModel)]="wordObj.isChecked" class="form-check-input" />
+            <label [for]="'word-' + wordObj.text" class="form-check-label">Marcar</label>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
 
-  <button (click)="drawWords()" [disabled]="loading || error">Sortear 5 Palavras</button>
-  <button (click)="resetWords()" [disabled]="loading || error">Reiniciar Lista</button>
+  <div *ngIf="selectedWords.length === 0" class="container d-flex justify-content-center align-items-center vh-100">
+    <button class="btn btn-primary btn-lg px-5 py-3" [disabled]="loading || error" (click)="drawWords()">Sortear
+      Palavras</button>
+  </div>
 
-  <ul>
-    <li *ngFor="let word of selectedWords">{{ word }}</li>
-  </ul>
+  <!-- Timer -->
+  <div *ngIf="gameStarted && timer > 0" class="text-center my-4">
+    <div class="timer display-4"
+      [ngClass]="{'text-danger': timer <= 10, 'text-warning': timer <= 20 && timer > 10, 'text-success': timer > 20}">
+      {{ timer }}s
+    </div>
+  </div>
+
+  <!-- Botão finalizar -->
+  <div class="text-center mt-2">
+    <button class="btn btn-primary btn-lg px-5 py-3" *ngIf="selectedWords.length && !gameStarted"
+      (click)="startTimer()">Iniciar mímica</button>
+  </div>
+
+  <!-- Botão finalizar -->
+  <div class="text-center" *ngIf="timer === 0 && gameStarted">
+    <button class="btn btn-primary btn-lg px-5 py-3" (click)="callNextTeam()">Registrar pontos</button>
+  </div>
+
 </div>
+
+
+<!--
+<div class="container text-center mt-5">
+  <h1>Sua vez <br>
+    <span class="font-weigth-bold"> {{ currentPlayer.name}}</span>
+  </h1>
+
+  <div *ngIf="loading">Carregando palavras...</div>
+  <div *ngIf="error" class="error">{{ error }}</div>
+
+
+  <div *ngFor="let wordObj of selectedWords; let i = index" class="mb-3 animate__animated animate__zoomIn">
+    <div class="form-check">
+      <input type="checkbox" [(ngModel)]="wordObj.isChecked" class="form-check-input" />
+      <span class="form-check-label " style="font-size: 30px;">{{ wordObj.text }}</span>
+    </div>
+  </div>
+
+  <div>
+    <button *ngIf="selectedWords.length === 0" class="btn btn-block btn-secondary" (click)="drawWords()"
+      [disabled]="loading || error">Sortear palavras</button>
+
+    <button *ngIf="selectedWords.length && !gameStarted" class="btn btn-primary" (click)="startTimer()">DALE</button>
+
+    <div *ngIf="gameStarted && timer > 0" class="timer-container">
+      <span class="timer" [ngClass]="{'timer-warning': timer <= 10, 'timer-danger': timer <= 5}">
+        {{ timer }}
+      </span>
+    </div>
+
+    <button *ngIf="timer === 0" class="btn btn-block btn-primary animate__animated animate__heartBeat"
+      (click)="callNextTeam()">Finalizar</button>
+  </div>
+</div>
+-->

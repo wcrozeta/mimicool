@@ -1,0 +1,48 @@
+<div class="container results-container">
+  <h1 class="text-center mb-4">Resultados Final</h1>
+
+  <div *ngIf="!winner" class="alert alert-warning text-center" role="alert">
+    ⚖️ Jogo terminou empatado
+  </div>
+
+  <!-- Times e pontuação -->
+  <div class="row justify-content-center">
+    <div *ngFor="let team of teams" class="col-md-4 text-center">
+      <div class="card shadow-sm mb-4">
+        <div class="card-body">
+          <h2 *ngIf="winner?.name !== team.name" class="card-title">{{ team.name }}</h2>
+          <h2 *ngIf="winner?.name === team.name" class="text-success">🏆 {{ team.name }}</h2>
+          <p class="card-text">Pontuação total: <strong>{{ team.score }}</strong></p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Vencedor
+  <div class="text-center my-4">
+    <h2 *ngIf="winner" class="text-success">🏆 Vencedor: {{ winner.name }}</h2>
+    <h2 *ngIf="!winner" class="text-warning">⚖️ O jogo terminou empatado!</h2>
+  </div>
+  -->
+
+  <!-- Tabela de jogadores -->
+  <div class="table-responsive">
+    <h3 class="text-center">Pontuação Individual</h3>
+    <table class="table table-striped table-bordered mt-3">
+      <thead class="table-primary">
+        <tr>
+          <th scope="col">Jogador</th>
+          <th scope="col">Time</th>
+          <th scope="col">Pontuação</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let player of getPlayers()">
+          <td>{{ player.name }}</td>
+          <td>{{ player.team }}</td>
+          <td>{{ player.score }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>

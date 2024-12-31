@@ -7,12 +7,14 @@ import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { WordDrawComponent } from './word-draw/word-draw.component';
 import { CreateTeamsComponent } from './create-teams/create-teams.component';
-import { HomeComponent } from './home/home.component'; // Importar a tela inicial
+import { HomeComponent } from './home/home.component';
+import { ResultsComponent } from './results/results.component'; // Importar a tela inicial
 
 const routes: Routes = [
   { path: '', component: HomeComponent }, // Definir a rota inicial (Home)
   { path: 'create-teams', component: CreateTeamsComponent }, // Rota para a tela de criação de times
   { path: 'word-draw', component: WordDrawComponent }, // Rota para a tela de criação de times
+  { path: 'results', component: ResultsComponent }, // Rota para a tela de criação de times
 ];
 
 @NgModule({
@@ -20,7 +22,8 @@ const routes: Routes = [
     AppComponent,
     WordDrawComponent,
     CreateTeamsComponent,
-    HomeComponent
+    HomeComponent,
+    ResultsComponent
   ],
   imports: [
     BrowserModule,

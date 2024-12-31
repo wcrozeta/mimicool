@@ -1,27 +1,29 @@
-.container {
-  text-align: center;
-  margin-top: 20px;
-}
-
-button {
-  margin: 10px;
-  padding: 10px 20px;
-  font-size: 16px;
-  cursor: pointer;
-}
-
-ul {
-  list-style: none;
-  padding: 0;
-}
-
-li {
-  font-size: 18px;
-  margin: 5px 0;
-}
-
-p {
-  font-size: 18px;
+.word-text {
+  font-size: 1.5rem;
   font-weight: bold;
-  color: #ff0000;
+}
+
+.timer {
+  font-size: 3rem;
+  font-weight: bold;
+}
+
+.timer.text-danger {
+  color: #dc3545;
+  /* Vermelho */
+}
+
+.timer.text-warning {
+  color: #ffc107;
+  /* Amarelo */
+}
+
+.timer.text-success {
+  color: #28a745;
+  /* Verde */
+}
+
+.playerName {
+  color: #28a745;
+  font-size: 5rem;
 }
